@@ -3,29 +3,547 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alaguselvam N - Java Full Stack Developer</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Alaguselvam N | Java Full Stack Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --accent: #06b6d4;
+            --dark: #0f172a;
+            --darker: #020617;
+            --text: #e2e8f0;
+            --muted: #94a3b8;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--darker);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--darker); }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 3px; }
+
+        /* Animated background */
+        .hero-bg {
+            background: radial-gradient(ellipse at 20% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+                        radial-gradient(ellipse at 50% 80%, rgba(6, 182, 212, 0.08) 0%, transparent 50%),
+                        var(--darker);
+        }
+
+        /* Navbar */
+        .navbar {
+            backdrop-filter: blur(20px);
+            background: rgba(2, 6, 23, 0.8);
+            border-bottom: 1px solid rgba(99, 102, 241, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-link {
+            position: relative;
+            color: var(--muted);
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--text);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Hero */
+        .gradient-text {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 50px;
+            padding: 6px 16px;
+            font-size: 0.85rem;
+            color: #a5b4fc;
+            animation: fadeInDown 0.8s ease forwards;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.3); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .animate-fadeInUp { animation: fadeInUp 0.8s ease forwards; }
+        .animate-fadeInLeft { animation: fadeInLeft 0.8s ease forwards; }
+        .animate-float { animation: float 4s ease-in-out infinite; }
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+
+        /* Buttons */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 12px 28px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            padding: 12px 28px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(99, 102, 241, 0.4);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(99, 102, 241, 0.1);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Code window */
+        .code-window {
+            background: #1e1e2e;
+            border-radius: 16px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5), 0 0 60px rgba(99, 102, 241, 0.1);
+        }
+
+        .code-header {
+            background: #181825;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .dot-red { background: #ff5f57; }
+        .dot-yellow { background: #febc2e; }
+        .dot-green { background: #28c840; }
+
+        .code-content {
+            padding: 20px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.82rem;
+            line-height: 1.8;
+        }
+
+        .code-keyword { color: #cba6f7; }
+        .code-func { color: #89b4fa; }
+        .code-string { color: #a6e3a1; }
+        .code-comment { color: #585b70; }
+        .code-var { color: #f38ba8; }
+        .code-num { color: #fab387; }
+
+        /* Typing cursor */
+        .typing-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.1em;
+            background: var(--primary);
+            animation: blink 1s step-end infinite;
+            vertical-align: text-bottom;
+        }
+
+        @keyframes blink {
+            from, to { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Skills */
+        .skill-card {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(99, 102, 241, 0.15);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .skill-card:hover {
+            border-color: rgba(99, 102, 241, 0.5);
+            background: rgba(99, 102, 241, 0.05);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.15);
+        }
+
+        .skill-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: rgba(255,255,255,0.07);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            width: 0%;
+            transition: width 1.5s ease;
+        }
+
+        /* Projects */
+        .project-card {
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(99, 102, 241, 0.15);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .project-card:hover {
+            border-color: rgba(99, 102, 241, 0.4);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 0 30px rgba(99, 102, 241, 0.1);
+        }
+
+        .project-img {
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .tech-badge {
+            background: rgba(99, 102, 241, 0.15);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            color: #a5b4fc;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        /* Timeline */
+        .timeline-item {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: -30px;
+            width: 2px;
+            background: linear-gradient(180deg, var(--primary), transparent);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -6px;
+            top: 6px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 2px solid var(--darker);
+            box-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+        }
+
+        /* Contact */
+        .contact-input {
+            width: 100%;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 10px;
+            padding: 12px 16px;
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .contact-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+        }
+
+        .contact-input::placeholder {
+            color: var(--muted);
+        }
+
+        /* Section title */
+        .section-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.25);
+            border-radius: 50px;
+            padding: 4px 14px;
+            font-size: 0.8rem;
+            color: #a5b4fc;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        /* Floating particles */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: floatParticle linear infinite;
+        }
+
+        @keyframes floatParticle {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.4; }
+            90% { opacity: 0.4; }
+            100% { transform: translateY(-100px) rotate(720deg); opacity: 0; }
+        }
+
+        /* Mobile menu */
+        .mobile-menu {
+            display: none;
+            background: rgba(2, 6, 23, 0.98);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(99, 102, 241, 0.15);
+        }
+
+        .mobile-menu.open {
+            display: flex;
+        }
+
+        /* Glow effects */
+        .glow-blue {
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
+        }
+
+        .card-glow {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(6, 182, 212, 0.05));
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
+        }
+
+        /* Stats */
+        .stat-card {
+            text-align: center;
+            padding: 24px;
+            background: rgba(99, 102, 241, 0.05);
+            border: 1px solid rgba(99, 102, 241, 0.15);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            background: rgba(99, 102, 241, 0.1);
+            transform: scale(1.03);
+        }
+
+        /* Social links */
+        .social-link {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            color: var(--muted);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        /* Reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">Alaguselvam N</div>
-            <ul class="nav-menu">
-                <li><a href="#home" class="nav-link">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#skills" class="nav-link">Skills</a></li>
-                <li><a href="#experience" class="nav-link">Experience</a></li>
-                <li><a href="#projects" class="nav-link">Projects</a></li>
-                <li><a href="#education" class="nav-link">Education</a></li>
-                <li><a href="#resume" class="nav-link">Resume</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
+
+    <!-- Navbar -->
+    <nav class="navbar fixed top-0 left-0 right-0 z-50">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: linear-gradient(135deg, #6366f1, #06b6d4);">
+                    <span class="text-white font-bold text-sm">AN</span>
+                </div>
+                <span class="font-bold text-white">Alagu<span class="gradient-text">selvam N</span></span>
+            </a>
+
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#journey" class="nav-link">Journey</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+
+            <a href="#contact" class="hidden md:flex btn-primary text-sm py-2 px-5">
+                <i class="fas fa-paper-plane"></i> Hire Me
+            </a>
+
+            <button id="menuBtn" class="md:hidden text-white text-xl focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="mobile-menu flex-col px-6 py-4 gap-4 md:hidden">
+            <a href="#about" class="nav-link py-2">About</a>
+            <a href="#skills" class="nav-link py-2">Skills</a>
+            <a href="#projects" class="nav-link py-2">Projects</a>
+            <a href="#journey" class="nav-link py-2">Journey</a>
+            <a href="#contact" class="nav-link py-2">Contact</a>
+            <a href="#contact" class="btn-primary text-center mt-2">Hire Me</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
+<<<<<<< Updated upstream
     <header id="home" class="hero">
         <div class="hero-content">
             <img src="./assets/selvam.jpg" alt="Alaguselvam N" class="hero-photo">
@@ -36,42 +554,173 @@
                 <span class="hero-badge"><i class="fas fa-map-marker-alt"></i> Kalkurichi, Tamilnadu</span>
                 <span class="hero-badge"><i class="fas fa-plane"></i> Ready to Relocate</span>
                 <span class="hero-badge"><i class="fas fa-briefcase"></i> Open to Work</span>
+=======
+    <section class="hero-bg min-h-screen flex items-center justify-center relative pt-20" id="home">
+        <!-- Particles -->
+        <div id="particles" class="absolute inset-0 overflow-hidden pointer-events-none"></div>
+
+        <!-- Grid pattern -->
+        <div class="absolute inset-0 opacity-5" style="background-image: linear-gradient(rgba(99,102,241,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(99,102,241,0.5) 1px, transparent 1px); background-size: 50px 50px;"></div>
+
+        <div class="max-w-6xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center">
+            <!-- Left content -->
+            <div class="opacity-0 animate-fadeInLeft delay-1" style="animation-fill-mode: forwards;">
+                <div class="hero-badge mb-6">
+                    <div class="pulse-dot"></div>
+                    Available for opportunities
+                </div>
+
+                <h1 class="text-5xl md:text-6xl font-black mb-4 leading-tight">
+                    Hi, I'm<br>
+                    <span class="gradient-text">Alaguselvam N</span>
+                </h1>
+
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="h-1 w-10 rounded" style="background: linear-gradient(90deg, #6366f1, #06b6d4);"></div>
+                    <span class="text-xl font-medium" style="color: var(--muted);">
+                        Java Full Stack Developer
+                    </span>
+                </div>
+
+                <p class="text-base leading-relaxed mb-8" style="color: var(--muted); max-width: 480px;">
+                    Building robust backend systems and creating seamless user experiences. Specializing in Core & Advanced Java, Spring Boot, Angular, and MySQL. Ready to relocate and start my professional journey! 🚀
+                </p>
+
+                <div class="flex flex-wrap gap-4 mb-10">
+                    <a href="#projects" class="btn-primary">
+                        <i class="fas fa-rocket"></i> View My Work
+                    </a>
+                    <a href="#contact" class="btn-secondary">
+                        <i class="fas fa-envelope"></i> Contact Me
+                    </a>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="flex gap-6 flex-wrap">
+                    <div>
+                        <div class="text-2xl font-bold text-white">4+</div>
+                        <div class="text-xs" style="color: var(--muted);">Projects Built</div>
+                    </div>
+                    <div class="w-px" style="background: rgba(255,255,255,0.1);"></div>
+                    <div>
+                        <div class="text-2xl font-bold text-white">12+</div>
+                        <div class="text-xs" style="color: var(--muted);">Technologies</div>
+                    </div>
+                    <div class="w-px" style="background: rgba(255,255,255,0.1);"></div>
+                    <div>
+                        <div class="text-2xl font-bold text-white">∞</div>
+                        <div class="text-xs" style="color: var(--muted);">Enthusiasm</div>
+                    </div>
+                </div>
+>>>>>>> Stashed changes
             </div>
-            <div class="hero-buttons">
-                <a href="#contact" class="btn btn-primary">Get In Touch</a>
-                <a href="#projects" class="btn btn-secondary">View My Work</a>
-            </div>
-            <div class="social-links">
-                <a href="https://linkedin.com/in/alagu-selvam-757a99250" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                <a href="https://github.com/Alaguselvam003" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-                <a href="mailto:alagu1637@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+
+            <!-- Right: Code Window -->
+            <div class="animate-float" style="animation-delay: 0.5s;">
+                <div class="code-window">
+                    <div class="code-header">
+                        <div class="dot dot-red"></div>
+                        <div class="dot dot-yellow"></div>
+                        <div class="dot dot-green"></div>
+                        <span style="color: var(--muted); font-size: 0.75rem; margin-left: 8px; font-family: 'Fira Code', monospace;">developer.js</span>
+                    </div>
+                    <div class="code-content" id="codeContent">
+                        <div><span class="code-keyword">const</span> <span class="code-var">developer</span> = {</div>
+                        <div>&nbsp;&nbsp;<span class="code-func">name</span>: <span class="code-string">"Alaguselvam N"</span>,</div>
+                        <div>&nbsp;&nbsp;<span class="code-func">role</span>: <span class="code-string">"Java Full Stack Dev"</span>,</div>
+                        <div>&nbsp;&nbsp;<span class="code-func">experience</span>: <span class="code-string">"Fresher 🎓"</span>,</div>
+                        <div>&nbsp;&nbsp;<span class="code-func">stack</span>: [</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"Java"</span>, <span class="code-string">"Spring Boot"</span>,</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"Angular"</span>, <span class="code-string">"MySQL"</span></div>
+                        <div>&nbsp;&nbsp;],</div>
+                        <div>&nbsp;&nbsp;<span class="code-func">passion</span>: <span class="code-string">"Backend Systems & UI/UX"</span>,</div>
+                        <div>&nbsp;&nbsp;<span class="code-func">openToWork</span>: <span class="code-keyword">true</span>,</div>
+                        <div>&nbsp;&nbsp;<span class="code-func">coffee</span>: <span class="code-string">"required ☕"</span></div>
+                        <div>};</div>
+                        <div>&nbsp;</div>
+                        <div><span class="code-comment">// Let's build something amazing!</span></div>
+                        <div><span class="code-func">developer</span>.<span class="code-func">hire</span>(); <span class="typing-cursor"></span></div>
+                    </div>
+                </div>
+
+                <!-- Social Links below code -->
+                <div class="flex justify-center gap-3 mt-6">
+                    <a href="https://github.com/Alaguselvam003" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/alagu-selvam-757a99250" target="_blank" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="mailto:alagu1637@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                </div>
             </div>
         </div>
-        <div class="hero-shape"></div>
-    </header>
+
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 scroll-indicator">
+            <div class="flex flex-col items-center gap-2" style="color: var(--muted);">
+                <span class="text-xs font-medium">Scroll Down</span>
+                <i class="fas fa-chevron-down text-sm"></i>
+            </div>
+        </div>
+    </section>
 
     <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>I'm a motivated Java developer with strong knowledge of Core and Advanced Java, Spring Boot, MySQL, and web technologies. Currently pursuing B.E in Computer Science and Design at Sethu Institute of Technology with 7.8 CGPA.</p>
-                    <p>I'm passionate about building robust backend systems and creating seamless user experiences. I enjoy working on real-time projects that challenge me to learn and grow as a software professional.</p>
-                    <p>With hands-on experience in web development and modern frameworks, I'm eager to apply my skills to create impactful solutions in the software industry.</p>
+    <section id="about" class="py-24 relative">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <div class="section-tag"><i class="fas fa-user"></i> About Me</div>
+                <h2 class="text-4xl font-bold text-white mt-2">Who Am I?</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="reveal">
+                    <!-- Avatar Photo -->
+                    <div class="relative">
+                        <img src="./assets/selvam.jpg" alt="Alaguselvam N" class="w-full max-w-sm mx-auto aspect-square rounded-2xl object-cover" style="border: 1px solid rgba(99, 102, 241, 0.2);">
+                        <!-- Floating badges -->
+                        <div class="absolute -top-4 -right-4 card-glow text-center py-2 px-4 animate-float" style="animation-delay: 0s;">
+                            <div class="text-xl">⚡</div>
+                            <div class="text-xs font-medium text-white">Fast Learner</div>
+                        </div>
+                        <div class="absolute -bottom-4 -left-4 card-glow text-center py-2 px-4 animate-float" style="animation-delay: 1s;">
+                            <div class="text-xl">🎯</div>
+                            <div class="text-xs font-medium text-white">Problem Solver</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="about-stats">
-                    <div class="stat-card">
-                        <h3>3+</h3>
-                        <p>Projects</p>
+
+                <div class="reveal" style="transition-delay: 0.2s;">
+                    <h3 class="text-2xl font-bold text-white mb-4">Motivated Developer, Ready to Innovate</h3>
+                    <p class="text-base leading-relaxed mb-4" style="color: var(--muted);">
+                        I'm a motivated Java Full Stack Developer with strong knowledge of Core and Advanced Java, Spring Boot, MySQL, and web technologies. Currently pursuing B.E in Computer Science and Design at Sethu Institute of Technology with a 7.8 CGPA.
+                    </p>
+                    <p class="text-base leading-relaxed mb-6" style="color: var(--muted);">
+                        I'm passionate about building robust backend architectures and creating seamless, responsive user experiences. I enjoy working on real-time projects that challenge me to solve complex problems and grow as a software professional.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div class="stat-card">
+                            <div class="text-3xl font-black gradient-text">B.E</div>
+                            <div class="text-sm mt-1" style="color: var(--muted);">CS & Design</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="text-3xl font-black gradient-text">7.8</div>
+                            <div class="text-sm mt-1" style="color: var(--muted);">CGPA / 10</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="text-3xl font-black gradient-text">4+</div>
+                            <div class="text-sm mt-1" style="color: var(--muted);">Projects Built</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="text-3xl font-black gradient-text">Fresher</div>
+                            <div class="text-sm mt-1" style="color: var(--muted);">Experience</div>
+                        </div>
                     </div>
-                    <div class="stat-card">
-                        <h3>1+</h3>
-                        <p>Year Experience</p>
-                    </div>
-                    <div class="stat-card">
-                        <h3>5+</h3>
-                        <p>Technologies</p>
+
+                    <div class="flex gap-4">
+                        <a href="./assets/Alaguselvam-Resume.pdf" download class="btn-primary">
+                            <i class="fas fa-download"></i> Download Resume
+                        </a>
+                        <a href="#contact" class="btn-secondary">
+                            <i class="fas fa-comments"></i> Let's Talk
+                        </a>
                     </div>
                 </div>
             </div>
@@ -79,242 +728,611 @@
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="skills">
-        <div class="container">
-            <h2 class="section-title">Technical Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>Languages</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Java</span>
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">HTML/CSS</span>
-                        <span class="skill-tag">JavaScript</span>
+    <section id="skills" class="py-24" style="background: rgba(15, 23, 42, 0.4);">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <div class="section-tag"><i class="fas fa-code"></i> Skills</div>
+                <h2 class="text-4xl font-bold text-white mt-2">My Tech Stack</h2>
+                <p class="mt-3 text-base" style="color: var(--muted);">Technologies I've been working with recently</p>
+            </div>
+
+            <!-- Categories -->
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <!-- Frontend -->
+                <div class="reveal skill-card">
+                    <div class="skill-icon" style="background: rgba(99, 102, 241, 0.15);">🎨</div>
+                    <h3 class="font-bold text-white mb-3">Frontend</h3>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span style="color: var(--muted);">Angular</span>
+                                <span class="text-indigo-400">80%</span>
+                            </div>
+                            <div class="progress-bar"><div class="progress-fill" data-width="80"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span style="color: var(--muted);">HTML & CSS</span>
+                                <span class="text-indigo-400">85%</span>
+                            </div>
+                            <div class="progress-bar"><div class="progress-fill" data-width="85"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span style="color: var(--muted);">JavaScript</span>
+                                <span class="text-indigo-400">75%</span>
+                            </div>
+                            <div class="progress-bar"><div class="progress-fill" data-width="75"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span style="color: var(--muted);">Bootstrap</span>
+                                <span class="text-indigo-400">80%</span>
+                            </div>
+                            <div class="progress-bar"><div class="progress-fill" data-width="80"></div></div>
+                        </div>
                     </div>
                 </div>
-                <div class="skill-category">
-                    <h3>Frameworks & Tools</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Spring Boot</span>
-                        <span class="skill-tag">Angular</span>
-                        <span class="skill-tag">REST APIs</span>
-                        <span class="skill-tag">Git</span>
-                        <span class="skill-tag">VS Code</span>
-                        <span class="skill-tag">Eclipse</span>
+
+                <!-- Backend -->
+                <div class="reveal skill-card" style="transition-delay: 0.1s;">
+                    <div class="skill-icon" style="background: rgba(6, 182, 212, 0.15);">⚙️</div>
+                    <h3 class="font-bold text-white mb-3">Backend</h3>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span style="color: var(--muted);">Java (Core & Adv)</span>
+                                <span class="text-cyan-400">85%</span>
+                            </div>
+                            <div class="progress-bar"><div class="progress-fill" data-width="85"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span style="color: var(--muted);">Spring Boot</span>
+                                <span class="text-cyan-400">80%</span>
+                            </div>
+                            <div class="progress-bar"><div class="progress-fill" data-width="80"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span style="color: var(--muted);">REST APIs</span>
+                                <span class="text-cyan-400">80%</span>
+                            </div>
+                            <div class="progress-bar"><div class="progress-fill" data-width="80"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span style="color: var(--muted);">JDBC</span>
+                                <span class="text-cyan-400">75%</span>
+                            </div>
+                            <div class="progress-bar"><div class="progress-fill" data-width="75"></div></div>
+                        </div>
                     </div>
                 </div>
-                <div class="skill-category">
-                    <h3>Databases & Design</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">MySQL</span>
-                        <span class="skill-tag">JDBC</span>
-                        <span class="skill-tag">UI/UX</span>
-                        <span class="skill-tag">Figma</span>
+
+                <!-- Database & Tools -->
+                <div class="reveal skill-card" style="transition-delay: 0.2s;">
+                    <div class="skill-icon" style="background: rgba(139, 92, 246, 0.15);">🗄️</div>
+                    <h3 class="font-bold text-white mb-3">Database & Tools</h3>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span style="color: var(--muted);">MySQL</span>
+                                <span class="text-purple-400">80%</span>
+                            </div>
+                            <div class="progress-bar"><div class="progress-fill" data-width="80"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span style="color: var(--muted);">Git & GitHub</span>
+                                <span class="text-purple-400">85%</span>
+                            </div>
+                            <div class="progress-bar"><div class="progress-fill" data-width="85"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span style="color: var(--muted);">VS Code / IntelliJ</span>
+                                <span class="text-purple-400">80%</span>
+                            </div>
+                            <div class="progress-bar"><div class="progress-fill" data-width="80"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span style="color: var(--muted);">Figma & UI/UX</span>
+                                <span class="text-purple-400">75%</span>
+                            </div>
+                            <div class="progress-bar"><div class="progress-fill" data-width="75"></div></div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Experience Section -->
-    <section id="experience" class="experience">
-        <div class="container">
-            <h2 class="section-title">Work Experience</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <h3>Frontend Developer Intern</h3>
-                        <p class="company">Edatic IT Support</p>
-                        <p class="period">November 2024 – January 2025</p>
-                        <ul class="achievements">
-                            <li>Worked on real-time client project (Gokul Coffee)</li>
-                            <li>Developed responsive user interfaces</li>
-                            <li>Improved performance and usability</li>
-                            <li>Collaborated in team-based development</li>
-                            <li>Used Git for version control and team collaboration</li>
-                        </ul>
-                        <p class="project-link"><strong>Website:</strong> <a href="https://www.gokulcoffee.com" target="_blank">www.gokulcoffee.com</a></p>
-                    </div>
+            <!-- Tech Icons -->
+            <div class="reveal">
+                <div class="text-center mb-6">
+                    <p class="text-sm" style="color: var(--muted);">Other technologies I work with</p>
+                </div>
+                <div class="flex flex-wrap justify-center gap-3">
+                    <!-- Loaded dynamically in JavaScript -->
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <div class="container">
-            <h2 class="section-title">Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3>Automated Pneumonia Detection</h3>
-                        <span class="project-badge">Deep Learning</span>
+    <section id="projects" class="py-24">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <div class="section-tag"><i class="fas fa-briefcase"></i> Projects</div>
+                <h2 class="text-4xl font-bold text-white mt-2">What I've Built</h2>
+                <p class="mt-3 text-base" style="color: var(--muted);">A showcase of my recent projects and experiments</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Project 1 -->
+                <div class="project-card reveal">
+                    <div class="project-img" style="background: linear-gradient(135deg, #1a1a2e, #16213e); display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                        🫁
+                        <div class="project-overlay">
+                            <div class="flex gap-3">
+                                <a href="https://github.com/Alaguselvam003" target="_blank" class="btn-primary py-2 px-4 text-sm"><i class="fab fa-github"></i> GitHub</a>
+                            </div>
+                        </div>
                     </div>
-                    <p class="project-description">Developed a deep learning-based Pneumonia Detection System using chest X-ray images to accurately classify X-ray images as Normal or Pneumonia.</p>
-                    <div class="tech-stack">
-                        <span class="tech">Python</span>
-                        <span class="tech">TensorFlow</span>
-                        <span class="tech">CNN</span>
-                        <span class="tech">Machine Learning</span>
+                    <div class="p-5">
+                        <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 mb-2 inline-block">Deep Learning</span>
+                        <h3 class="font-bold text-white text-lg mb-2">Automated Pneumonia Detection</h3>
+                        <p class="text-sm mb-4" style="color: var(--muted);">Deep learning-based Pneumonia Detection System using chest X-ray images to accurately classify X-ray images as Normal or Pneumonia.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">TensorFlow</span>
+                            <span class="tech-badge">CNN</span>
+                            <span class="tech-badge">Machine Learning</span>
+                        </div>
                     </div>
-                    <ul class="project-details">
-                        <li>Built and trained CNN model using TensorFlow</li>
-                        <li>Improved prediction accuracy through image preprocessing</li>
-                        <li>Performed data augmentation for better performance</li>
-                        <li>Applied medical image analysis concepts</li>
-                    </ul>
                 </div>
 
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3>Gokul Coffee</h3>
-                        <span class="project-badge">Web Application</span>
+                <!-- Project 2 -->
+                <div class="project-card reveal" style="transition-delay: 0.1s;">
+                    <div class="project-img" style="background: linear-gradient(135deg, #0d1b2a, #1b2838); display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                        ☕
+                        <div class="project-overlay">
+                            <div class="flex gap-3">
+                                <a href="https://www.gokulcoffee.com" target="_blank" class="btn-primary py-2 px-4 text-sm"><i class="fas fa-eye"></i> Website</a>
+                            </div>
+                        </div>
                     </div>
-                    <p class="project-description">Real-time client project focused on developing responsive user interfaces with improved performance and usability for a coffee business.</p>
-                    <div class="tech-stack">
-                        <span class="tech">HTML/CSS</span>
-                        <span class="tech">JavaScript</span>
-                        <span class="tech">Git</span>
-                        <span class="tech">Responsive Design</span>
+                    <div class="p-5">
+                        <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20 mb-2 inline-block">Web Application</span>
+                        <h3 class="font-bold text-white text-lg mb-2">Gokul Coffee</h3>
+                        <p class="text-sm mb-4" style="color: var(--muted);">Real-time client project focused on developing responsive user interfaces with improved performance and usability for a coffee business.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tech-badge">HTML/CSS</span>
+                            <span class="tech-badge">JavaScript</span>
+                            <span class="tech-badge">Git</span>
+                            <span class="tech-badge">Responsive Design</span>
+                        </div>
                     </div>
-                    <ul class="project-details">
-                        <li>Developed responsive user interfaces</li>
-                        <li>Improved performance and usability</li>
-                        <li>Collaborated in team-based development</li>
-                        <li>Version control using Git</li>
-                    </ul>
-                    <p class="project-link"><a href="https://www.gokulcoffee.com" target="_blank">Visit Website →</a></p>
                 </div>
 
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3>Customer Support Ticketing System</h3>
-                        <span class="project-badge">Full Stack</span>
+                <!-- Project 3 -->
+                <div class="project-card reveal" style="transition-delay: 0.2s;">
+                    <div class="project-img" style="background: linear-gradient(135deg, #1a0a2e, #2d1b4e); display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                        🎫
+                        <div class="project-overlay">
+                            <div class="flex gap-3">
+                                <a href="https://github.com/Alaguselvam003" target="_blank" class="btn-primary py-2 px-4 text-sm"><i class="fab fa-github"></i> GitHub</a>
+                            </div>
+                        </div>
                     </div>
-                    <p class="project-description">A comprehensive full-stack web application for efficiently managing customer queries, complaints, and service requests through a structured and centralized platform.</p>
-                    <div class="tech-stack">
-                        <span class="tech">Spring Boot</span>
-                        <span class="tech">Angular</span>
-                        <span class="tech">MySQL</span>
-                        <span class="tech">REST APIs</span>
-                        <span class="tech">JWT Authentication</span>
+                    <div class="p-5">
+                        <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 mb-2 inline-block">Full Stack</span>
+                        <h3 class="font-bold text-white text-lg mb-2">Customer Support Ticketing System</h3>
+                        <p class="text-sm mb-4" style="color: var(--muted);">Comprehensive full-stack application for managing customer queries and support tickets, featuring JWT and role-based access control.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tech-badge">Spring Boot</span>
+                            <span class="tech-badge">Angular</span>
+                            <span class="tech-badge">MySQL</span>
+                            <span class="tech-badge">JWT Auth</span>
+                        </div>
                     </div>
-                    <ul class="project-details">
-                        <li>Secure user registration and login with JWT authentication</li>
-                        <li>Create support tickets with categories, priority levels, and file attachments</li>
-                        <li>Real-time ticket tracking through multiple statuses (Open, In Progress, Resolved, Closed)</li>
-                        <li>Role-based access control for customers, agents, and administrators</li>
-                        <li>Support agent ticket management and response system with internal notes</li>
-                        <li>Admin dashboard with key metrics: response time, resolution rate, and agent performance</li>
-                        <li>Responsive user interface for seamless customer and support staff experience</li>
-                    </ul>
-                    <p class="project-highlights"><strong>Key Features:</strong> Role-based Authorization | RESTful API Design | Real-time Ticket Management | Admin Dashboard | Secure Authentication</p>
                 </div>
+
+                <!-- Project 4 -->
+                <div class="project-card reveal" style="transition-delay: 0.1s;">
+                    <div class="project-img" style="background: linear-gradient(135deg, #0a2e1a, #1b4e2d); display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                        🗺️
+                        <div class="project-overlay">
+                            <div class="flex gap-3">
+                                <a href="https://github.com/Alaguselvam003" target="_blank" class="btn-primary py-2 px-4 text-sm"><i class="fab fa-github"></i> GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 mb-2 inline-block">Full Stack</span>
+                        <h3 class="font-bold text-white text-lg mb-2">Visitor Guidance & Tracking</h3>
+                        <p class="text-sm mb-4" style="color: var(--muted);">Java Full Stack app to securely manage visitor journeys inside an organization, including QR passes, and real-time indoor guidance.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tech-badge">Spring Boot</span>
+                            <span class="tech-badge">Angular</span>
+                            <span class="tech-badge">MySQL</span>
+                            <span class="tech-badge">QR Scanning</span>
+                            <span class="tech-badge">Bootstrap</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5 / CTA -->
+                <div class="project-card reveal flex items-center justify-center" style="transition-delay: 0.2s; min-height: 320px; background: linear-gradient(135deg, rgba(99,102,241,0.05), rgba(6,182,212,0.05));">
+                    <div class="text-center p-8">
+                        <div class="text-5xl mb-4">🚀</div>
+                        <h3 class="font-bold text-white text-lg mb-2">More Coming Soon</h3>
+                        <p class="text-sm mb-4" style="color: var(--muted);">I'm always building new things. Check out my GitHub for the latest!</p>
+                        <a href="https://github.com/Alaguselvam003" target="_blank" class="btn-primary text-sm py-2">
+                            <i class="fab fa-github"></i> View GitHub
+                        </a>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Education Section -->
-    <section id="education" class="education">
-        <div class="container">
-            <h2 class="section-title">Education</h2>
-            <div class="education-timeline">
-                <div class="education-item">
-                    <div class="edu-header">
-                        <h3>B.E in Computer Science and Design</h3>
-                        <span class="gpa">7.8 CGPA</span>
-                    </div>
-                    <p class="institute">Sethu Institute of Technology, Kariyapatti</p>
-                    <p class="period">2022 - 2026 (Anna University)</p>
-                </div>
-                <div class="education-item">
-                    <div class="edu-header">
-                        <h3>Higher Secondary Certificate (HSC)</h3>
-                        <span class="gpa">75.3%</span>
-                    </div>
-                    <p class="institute">S.B.K Higher Secondary School, Aruppukkottai</p>
-                    <p class="period">2022 (State Board of Tamilnadu)</p>
-                </div>
-                <div class="education-item">
-                    <div class="edu-header">
-                        <h3>Secondary School Leaving Certificate (SSLC)</h3>
-                        <span class="gpa">75.2%</span>
-                    </div>
-                    <p class="institute">Government High School, Thonugal</p>
-                    <p class="period">2020 (State Board of Tamilnadu)</p>
-                </div>
+    <!-- Journey Section -->
+    <section id="journey" class="py-24" style="background: rgba(15, 23, 42, 0.4);">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <div class="section-tag"><i class="fas fa-road"></i> Journey</div>
+                <h2 class="text-4xl font-bold text-white mt-2">My Story So Far</h2>
+                <p class="mt-3 text-base" style="color: var(--muted);">Education, experience, and milestones</p>
             </div>
-        </div>
-    </section>
 
-    <!-- Resume Section -->
-    <section id="resume" class="resume">
-        <div class="container">
-            <h2 class="section-title">Resume & GitHub</h2>
-            <p class="resume-intro">Download my resume or explore my projects on GitHub to know more about my skills and experience.</p>
-            <div class="resume-buttons">
-                <a href="./assets/Alaguselvam N - Resume.pdf" download class="btn-resume">
-                    <i class="fas fa-download"></i> Download Resume
-                </a>
-                <a href="https://github.com/Alaguselvam003" target="_blank" class="btn-github-profile">
-                    <i class="fab fa-github"></i> GitHub Profile
-                </a>
+
+            <div class="space-y-8">
+
+                <!-- Milestone 1 -->
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="skill-card mb-0">
+                        <div class="flex items-start justify-between flex-wrap gap-2 mb-3">
+                            <div>
+                                <span class="text-xs font-medium px-3 py-1 rounded-full mb-2 inline-block" style="background: rgba(34, 197, 94, 0.15); color: #4ade80;">Current</span>
+                                <h3 class="font-bold text-white text-lg">Actively Job Hunting</h3>
+                                <p style="color: var(--primary);" class="font-medium text-sm">Java Full Stack Developer Role</p>
+                            </div>
+                            <span class="text-sm" style="color: var(--muted);">2026 – Present</span>
+                        </div>
+                        <p class="text-sm" style="color: var(--muted);">Seeking entry-level developer positions. Actively coding, expanding knowledge of modern backend systems, building projects, and preparing for professional software engineering interviews.</p>
+                    </div>
+                </div>
+
+                <!-- Milestone 2 -->
+                <div class="timeline-item reveal" style="transition-delay: 0.1s;">
+                    <div class="timeline-dot"></div>
+                    <div class="skill-card mb-0">
+                        <div class="flex items-start justify-between flex-wrap gap-2 mb-3">
+                            <div>
+                                <h3 class="font-bold text-white text-lg">Java Full Stack Web Dev Intern</h3>
+                                <p style="color: var(--primary);" class="font-medium text-sm">Zenjade Automation Technology Pvt Ltd</p>
+                            </div>
+                            <span class="text-sm" style="color: var(--muted);">June 2026</span>
+                        </div>
+                        <p class="text-sm mb-3" style="color: var(--muted);">Completed the internship programme on Java Full Stack Web Development. Gained hands-on experience building integrated web applications using Java, Spring Boot, database engines, and frontend design principles.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tech-badge">Java</span>
+                            <span class="tech-badge">Spring Boot</span>
+                            <span class="tech-badge">Web Development</span>
+                            <span class="tech-badge">Full Stack</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Milestone 3 -->
+                <div class="timeline-item reveal" style="transition-delay: 0.2s;">
+                    <div class="timeline-dot"></div>
+                    <div class="skill-card mb-0">
+                        <div class="flex items-start justify-between flex-wrap gap-2 mb-3">
+                            <div>
+                                <h3 class="font-bold text-white text-lg">Frontend Developer Intern</h3>
+                                <p style="color: var(--primary);" class="font-medium text-sm">Edatic IT Support</p>
+                            </div>
+                            <span class="text-sm" style="color: var(--muted);">Nov 2024 – Jan 2025</span>
+                        </div>
+                        <p class="text-sm mb-3" style="color: var(--muted);">Worked on real-time client project (Gokul Coffee), developed responsive user interfaces, optimized site usability, and collaborated in a team environment using Git.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tech-badge">HTML/CSS</span>
+                            <span class="tech-badge">JavaScript</span>
+                            <span class="tech-badge">Git</span>
+                            <span class="tech-badge">UI/UX Design</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Milestone 4 -->
+                <div class="timeline-item reveal" style="transition-delay: 0.3s;">
+                    <div class="timeline-dot"></div>
+                    <div class="skill-card mb-0">
+                        <div class="flex items-start justify-between flex-wrap gap-2 mb-3">
+                            <div>
+                                <h3 class="font-bold text-white text-lg">B.E – Computer Science and Design</h3>
+                                <p style="color: var(--secondary);" class="font-medium text-sm">Sethu Institute of Technology</p>
+                            </div>
+                            <span class="text-sm" style="color: var(--muted);">2022 – 2026</span>
+                        </div>
+                        <p class="text-sm mb-3" style="color: var(--muted);">Pursuing undergraduate degree (Anna University) with a 7.8 CGPA. Focused on Core & Advanced Java, Databases, REST APIs, and UI/UX design concepts.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tech-badge">🎓 Pursuing</span>
+                            <span class="tech-badge">⭐ 7.8 CGPA</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Milestone 5 -->
+                <div class="timeline-item reveal" style="transition-delay: 0.4s;">
+                    <div class="timeline-dot"></div>
+                    <div class="skill-card mb-0">
+                        <div class="flex items-start justify-between flex-wrap gap-2 mb-3">
+                            <div>
+                                <h3 class="font-bold text-white text-lg">Higher Secondary Certificate (HSC)</h3>
+                                <p style="color: var(--accent);" class="font-medium text-sm">S.B.K Higher Secondary School, Aruppukkottai</p>
+                            </div>
+                            <span class="text-sm" style="color: var(--muted);">Completed 2022</span>
+                        </div>
+                        <p class="text-sm mb-3" style="color: var(--muted);">State Board of Tamilnadu.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tech-badge">⭐ 75.3%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Milestone 6 -->
+                <div class="timeline-item reveal" style="transition-delay: 0.5s;">
+                    <div class="timeline-dot"></div>
+                    <div class="skill-card mb-0">
+                        <div class="flex items-start justify-between flex-wrap gap-2 mb-3">
+                            <div>
+                                <h3 class="font-bold text-white text-lg">Secondary School Leaving Certificate (SSLC)</h3>
+                                <p style="color: var(--accent);" class="font-medium text-sm">Government High School, Thonugal</p>
+                            </div>
+                            <span class="text-sm" style="color: var(--muted);">Completed 2020</span>
+                        </div>
+                        <p class="text-sm mb-3" style="color: var(--muted);">State Board of Tamilnadu.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tech-badge">⭐ 75.2%</span>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            <p class="contact-intro">I'm always open to new opportunities and interesting projects. Feel free to reach out!</p>
-            <div class="contact-grid">
-                <div class="contact-card">
-                    <i class="fas fa-envelope"></i>
-                    <h3>Email</h3>
-                    <a href="mailto:alagu1637@gmail.com">alagu1637@gmail.com</a>
-                </div>
-                <div class="contact-card">
-                    <i class="fas fa-phone"></i>
-                    <h3>Phone</h3>
-                    <a href="tel:+918220308621">+91-8220308621</a>
-                </div>
-                <div class="contact-card">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <h3>Location</h3>
-                    <p>Kalkurichi, Virudhunagar, Tamilnadu</p>
-                </div>
-                <div class="contact-card">
-                    <i class="fas fa-plane"></i>
-                    <h3>Relocation</h3>
-                    <p>Ready to Relocate Anywhere</p>
-                </div>
+    <section id="contact" class="py-24">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <div class="section-tag"><i class="fas fa-envelope"></i> Contact</div>
+                <h2 class="text-4xl font-bold text-white mt-2">Let's Connect!</h2>
+                <p class="mt-3 text-base" style="color: var(--muted);">Open to opportunities, collaborations, or just a friendly chat ☕</p>
             </div>
-            <div class="social-section">
-                <h3>Connect With Me</h3>
-                <div class="social-icons">
-                    <a href="https://linkedin.com/in/alagu-selvam-757a99250" target="_blank" class="social-icon" title="LinkedIn">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="https://github.com/Alaguselvam003" target="_blank" class="social-icon" title="GitHub">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="mailto:alagu1637@gmail.com" class="social-icon" title="Email">
-                        <i class="fas fa-envelope"></i>
-                    </a>
+
+            <div class="grid md:grid-cols-2 gap-10">
+
+                <!-- Contact Info -->
+                <div class="reveal">
+                    <h3 class="text-xl font-bold text-white mb-6">Get in Touch</h3>
+
+                    <div class="space-y-4 mb-8">
+                        <a href="mailto:alagu1637@gmail.com" class="flex items-center gap-4 p-4 skill-card group">
+                            <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl flex-shrink-0 group-hover:scale-110 transition-transform" style="background: rgba(99,102,241,0.15);">📧</div>
+                            <div>
+                                <p class="text-sm" style="color: var(--muted);">Email</p>
+                                <p class="font-medium text-white">alagu1637@gmail.com</p>
+                            </div>
+                        </a>
+
+                        <a href="https://linkedin.com/in/alagu-selvam-757a99250" target="_blank" class="flex items-center gap-4 p-4 skill-card group">
+                            <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl flex-shrink-0 group-hover:scale-110 transition-transform" style="background: rgba(6,182,212,0.15);">💼</div>
+                            <div>
+                                <p class="text-sm" style="color: var(--muted);">LinkedIn</p>
+                                <p class="font-medium text-white">linkedin.com/in/alagu-selvam-757a99250</p>
+                            </div>
+                        </a>
+
+                        <a href="https://github.com/Alaguselvam003" target="_blank" class="flex items-center gap-4 p-4 skill-card group">
+                            <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl flex-shrink-0 group-hover:scale-110 transition-transform" style="background: rgba(139,92,246,0.15);">🐙</div>
+                            <div>
+                                <p class="text-sm" style="color: var(--muted);">GitHub</p>
+                                <p class="font-medium text-white">github.com/Alaguselvam003</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="card-glow p-5">
+                        <p class="text-sm font-medium text-white mb-2">🚀 Available for:</p>
+                        <ul class="space-y-1">
+                            <!-- Loaded dynamically in JavaScript -->
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="reveal" style="transition-delay: 0.2s;">
+                    <form id="contactForm" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-2" style="color: var(--muted);">Your Name</label>
+                            <input type="text" placeholder="John Doe" class="contact-input" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2" style="color: var(--muted);">Email Address</label>
+                            <input type="email" placeholder="john@example.com" class="contact-input" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2" style="color: var(--muted);">Subject</label>
+                            <input type="text" placeholder="Job Opportunity / Collaboration" class="contact-input" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2" style="color: var(--muted);">Message</label>
+                            <textarea placeholder="Tell me about the opportunity or project..." class="contact-input" rows="5" style="resize: vertical;" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary w-full justify-center">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                    </form>
+
+                    <!-- Success message (hidden) -->
+                    <div id="successMsg" class="hidden mt-4 p-4 rounded-xl text-center" style="background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3);">
+                        <p class="text-green-400 font-medium">✅ Message sent! I'll get back to you soon.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2026 Alaguselvam N. All rights reserved. | Built with HTML, CSS & JavaScript</p>
+    <footer class="py-10 border-t" style="border-color: rgba(99,102,241,0.15);">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: linear-gradient(135deg, #6366f1, #06b6d4);">
+                    <span class="text-white font-bold text-sm">AN</span>
+                </div>
+                <span class="font-bold text-white">Alagu<span class="gradient-text">selvam N</span></span>
+            </div>
+            <p class="text-sm" style="color: var(--muted);">
+                Crafted with ❤️ | © 2026 Alaguselvam N
+            </p>
+            <div class="flex gap-3">
+                <a href="https://github.com/Alaguselvam003" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/alagu-selvam-757a99250" target="_blank" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                <a href="mailto:alagu1637@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+            </div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // ========== Navbar scroll effect ==========
+        const navbar = document.querySelector('.navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // ========== Mobile menu ==========
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+            const icon = menuBtn.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Close mobile menu on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                const icon = menuBtn.querySelector('i');
+                icon.classList.add('fa-bars');
+                icon.classList.remove('fa-times');
+            });
+        });
+
+        // ========== Particles ==========
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const colors = ['rgba(99,102,241,0.6)', 'rgba(139,92,246,0.6)', 'rgba(6,182,212,0.6)'];
+
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                const size = Math.random() * 4 + 2;
+                particle.classList.add('particle');
+                particle.style.cssText = `
+                    width: ${size}px;
+                    height: ${size}px;
+                    background: ${colors[Math.floor(Math.random() * colors.length)]};
+                    left: ${Math.random() * 100}%;
+                    animation-duration: ${Math.random() * 15 + 10}s;
+                    animation-delay: ${Math.random() * 10}s;
+                `;
+                container.appendChild(particle);
+            }
+        }
+        createParticles();
+
+        // ========== Scroll reveal ==========
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+
+                    // Animate progress bars
+                    const progressBars = entry.target.querySelectorAll('.progress-fill');
+                    progressBars.forEach(bar => {
+                        const width = bar.getAttribute('data-width');
+                        setTimeout(() => {
+                            bar.style.width = width + '%';
+                        }, 300);
+                    });
+                }
+            });
+        }, { threshold: 0.1 });
+
+        reveals.forEach(el => observer.observe(el));
+
+        // ========== Tech badges (fix template literal issue) ==========
+        const techList = ["Java", "Spring Boot", "Angular", "MySQL", "JDBC", "HTML/CSS", "JavaScript", "Bootstrap", "Git", "GitHub", "Figma", "Postman", "IntelliJ IDEA", "VS Code"];
+        const techContainer = document.querySelector('#skills .reveal:last-child .flex.flex-wrap');
+        if (techContainer) {
+            techContainer.innerHTML = techList.map(tech => `<span class="tech-badge">${tech}</span>`).join('');
+        }
+
+        // ========== Available for list ==========
+        const availableList = document.querySelector('.card-glow ul');
+        if (availableList) {
+            const items = ["Full-time positions", "Internship roles", "Freelance projects", "Java developer positions"];
+            availableList.innerHTML = items.map(item => `<li class="text-sm flex items-center gap-2" style="color: var(--muted);"><span style="color: #22c55e;">✓</span> ${item}</li>`).join('');
+        }
+
+        // ========== Contact form ==========
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                e.target.style.display = 'none';
+                document.getElementById('successMsg').classList.remove('hidden');
+            }, 1500);
+        });
+
+        // ========== Smooth active nav link ==========
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (window.scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.style.color = '';
+                if (link.getAttribute('href') === '#' + current) {
+                    link.style.color = '#a5b4fc';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
