@@ -32,7 +32,6 @@ body {
     overflow-x: hidden;
 }
 
-/* Navigation */
 .navbar {
     background: #111111;
     padding: 1rem 0;
@@ -77,14 +76,12 @@ body {
     opacity: 1;
 }
 
-/* Container */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 2rem;
 }
 
-/* Hero Section */
 .hero {
     background: #111111;
     color: white;
@@ -265,7 +262,6 @@ body {
     transform: translateY(-5px);
 }
 
-/* Sections */
 section {
     padding: 4rem 0;
 }
@@ -291,7 +287,6 @@ section {
     border-radius: 2px;
 }
 
-/* About Section */
 .about {
     background: #FFFBF0;
 }
@@ -342,7 +337,6 @@ section {
     font-weight: 600;
 }
 
-/* Skills Section */
 .skills {
     background: #FEF3C7;
 }
@@ -389,7 +383,6 @@ section {
     box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
 }
 
-/* Experience Section */
 .experience {
     background: #FFFBF0;
 }
@@ -485,7 +478,6 @@ section {
     text-decoration: underline;
 }
 
-/* Projects Section */
 .projects {
     background: #FEF3C7;
 }
@@ -653,7 +645,6 @@ section {
     transform: translateY(-2px);
 }
 
-/* Education Section */
 .education {
     background: #FFFBF0;
 }
@@ -708,7 +699,6 @@ section {
     font-size: 0.9rem;
 }
 
-/* Resume Section */
 .resume {
     background: #111111;
     text-align: center;
@@ -781,7 +771,6 @@ section {
     box-shadow: 0 8px 25px rgba(245, 158, 11, 0.5);
 }
 
-/* Contact Section */
 .contact {
     background: #111111;
     color: white;
@@ -876,7 +865,6 @@ section {
     transform: translateY(-5px) scale(1.1);
 }
 
-/* Footer */
 .footer {
     background: #0a0a0a;
     color: white;
@@ -889,7 +877,6 @@ section {
     color: #78716C;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
     .nav-menu {
         gap: 1rem;
@@ -987,12 +974,11 @@ a {
     color: #0066cc;
     text-decoration: none;
   }
-  
+
   a:hover {
     text-decoration: underline;
   }
-  
+
   .contact p {
     margin: 0.5rem 0;
   }
-  

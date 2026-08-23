@@ -35,12 +35,10 @@
             scroll-behavior: smooth;
         }
 
-        /* Scrollbar */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--darker); }
         ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 3px; }
 
-        /* Animated background */
         .hero-bg {
             background: radial-gradient(ellipse at 20% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
                         radial-gradient(ellipse at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
@@ -48,7 +46,6 @@
                         var(--darker);
         }
 
-        /* Navbar */
         .navbar {
             backdrop-filter: blur(20px);
             background: rgba(2, 6, 23, 0.8);
@@ -87,7 +84,6 @@
             width: 100%;
         }
 
-        /* Hero */
         .gradient-text {
             background: linear-gradient(135deg, #6366f1, #8b5cf6, #06b6d4);
             -webkit-background-clip: text;
@@ -149,7 +145,6 @@
         .delay-3 { animation-delay: 0.6s; }
         .delay-4 { animation-delay: 0.8s; }
 
-        /* Buttons */
         .btn-primary {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
@@ -194,7 +189,6 @@
             transform: translateY(-2px);
         }
 
-        /* Code window */
         .code-window {
             background: #1e1e2e;
             border-radius: 16px;
@@ -231,7 +225,6 @@
         .code-var { color: #f38ba8; }
         .code-num { color: #fab387; }
 
-        /* Typing cursor */
         .typing-cursor {
             display: inline-block;
             width: 2px;
@@ -246,7 +239,6 @@
             50% { opacity: 0; }
         }
 
-        /* Skills */
         .skill-card {
             background: rgba(15, 23, 42, 0.8);
             border: 1px solid rgba(99, 102, 241, 0.15);
@@ -290,7 +282,6 @@
             transition: width 1.5s ease;
         }
 
-        /* Projects */
         .project-card {
             background: rgba(15, 23, 42, 0.9);
             border: 1px solid rgba(99, 102, 241, 0.15);
@@ -336,7 +327,6 @@
             font-weight: 500;
         }
 
-        /* Timeline */
         .timeline-item {
             position: relative;
             padding-left: 30px;
@@ -364,7 +354,6 @@
             box-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
         }
 
-        /* Contact */
         .contact-input {
             width: 100%;
             background: rgba(15, 23, 42, 0.8);
@@ -387,7 +376,6 @@
             color: var(--muted);
         }
 
-        /* Section title */
         .section-tag {
             display: inline-flex;
             align-items: center;
@@ -402,7 +390,6 @@
             margin-bottom: 12px;
         }
 
-        /* Floating particles */
         .particle {
             position: absolute;
             border-radius: 50%;
@@ -417,7 +404,6 @@
             100% { transform: translateY(-100px) rotate(720deg); opacity: 0; }
         }
 
-        /* Mobile menu */
         .mobile-menu {
             display: none;
             background: rgba(2, 6, 23, 0.98);
@@ -429,7 +415,6 @@
             display: flex;
         }
 
-        /* Glow effects */
         .glow-blue {
             box-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
         }
@@ -441,7 +426,6 @@
             padding: 24px;
         }
 
-        /* Scroll indicator */
         .scroll-indicator {
             animation: bounce 2s infinite;
         }
@@ -451,7 +435,6 @@
             50% { transform: translateY(8px); }
         }
 
-        /* Stats */
         .stat-card {
             text-align: center;
             padding: 24px;
@@ -466,7 +449,6 @@
             transform: scale(1.03);
         }
 
-        /* Social links */
         .social-link {
             width: 42px;
             height: 42px;
@@ -489,7 +471,6 @@
             box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
         }
 
-        /* Reveal animation */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -504,7 +485,6 @@
 </head>
 <body>
 
-    <!-- Navbar -->
     <nav class="navbar fixed top-0 left-0 right-0 z-50">
         <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
             <a href="#" class="flex items-center gap-2">
@@ -531,7 +511,6 @@
             </button>
         </div>
 
-        <!-- Mobile Menu -->
         <div id="mobileMenu" class="mobile-menu flex-col px-6 py-4 gap-4 md:hidden">
             <a href="#about" class="nav-link py-2">About</a>
             <a href="#skills" class="nav-link py-2">Skills</a>
@@ -542,17 +521,14 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-
     <section class="hero-bg min-h-screen flex items-center justify-center relative pt-20" id="home">
-        <!-- Particles -->
+
         <div id="particles" class="absolute inset-0 overflow-hidden pointer-events-none"></div>
 
-        <!-- Grid pattern -->
         <div class="absolute inset-0 opacity-5" style="background-image: linear-gradient(rgba(99,102,241,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(99,102,241,0.5) 1px, transparent 1px); background-size: 50px 50px;"></div>
 
         <div class="max-w-6xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center">
-            <!-- Left content -->
+
             <div class="opacity-0 animate-fadeInLeft delay-1" style="animation-fill-mode: forwards;">
                 <div class="hero-badge mb-6">
                     <div class="pulse-dot"></div>
@@ -584,7 +560,7 @@
                     </a>
                 </div>
 
-                <!-- Quick Stats -->
+                
                 <div class="flex gap-6 flex-wrap">
                     <div>
                         <div class="text-2xl font-bold text-white">4+</div>
@@ -604,7 +580,7 @@
 
             </div>
 
-            <!-- Right: Code Window -->
+           
             <div class="animate-float" style="animation-delay: 0.5s;">
                 <div class="code-window">
                     <div class="code-header">
@@ -632,7 +608,6 @@
                     </div>
                 </div>
 
-                <!-- Social Links below code -->
                 <div class="flex justify-center gap-3 mt-6">
                     <a href="https://github.com/Alaguselvam003" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
                     <a href="https://linkedin.com/in/alagu-selvam-757a99250" target="_blank" class="social-link"><i class="fab fa-linkedin-in"></i></a>
@@ -641,7 +616,6 @@
             </div>
         </div>
 
-        <!-- Scroll indicator -->
         <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 scroll-indicator">
             <div class="flex flex-col items-center gap-2" style="color: var(--muted);">
                 <span class="text-xs font-medium">Scroll Down</span>
@@ -650,7 +624,6 @@
         </div>
     </section>
 
-    <!-- About Section -->
     <section id="about" class="py-24 relative">
         <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-16 reveal">
@@ -660,10 +633,10 @@
 
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <div class="reveal">
-                    <!-- Avatar Photo -->
+
                     <div class="relative">
                         <img src="./assets/selvam.jpg" alt="Alaguselvam N" class="w-full max-w-sm mx-auto aspect-square rounded-2xl object-cover" style="border: 1px solid rgba(99, 102, 241, 0.2);">
-                        <!-- Floating badges -->
+
                         <div class="absolute -top-4 -right-4 card-glow text-center py-2 px-4 animate-float" style="animation-delay: 0s;">
                             <div class="text-xl">⚡</div>
                             <div class="text-xs font-medium text-white">Fast Learner</div>
@@ -716,7 +689,7 @@
         </div>
     </section>
 
-    <!-- Skills Section -->
+    
     <section id="skills" class="py-24" style="background: rgba(15, 23, 42, 0.4);">
         <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-16 reveal">
@@ -725,9 +698,8 @@
                 <p class="mt-3 text-base" style="color: var(--muted);">Technologies I've been working with recently</p>
             </div>
 
-            <!-- Categories -->
             <div class="grid md:grid-cols-3 gap-6 mb-8">
-                <!-- Frontend -->
+
                 <div class="reveal skill-card">
                     <div class="skill-icon" style="background: rgba(99, 102, 241, 0.15);">🎨</div>
                     <h3 class="font-bold text-white mb-3">Frontend</h3>
@@ -763,7 +735,6 @@
                     </div>
                 </div>
 
-                <!-- Backend -->
                 <div class="reveal skill-card" style="transition-delay: 0.1s;">
                     <div class="skill-icon" style="background: rgba(6, 182, 212, 0.15);">⚙️</div>
                     <h3 class="font-bold text-white mb-3">Backend</h3>
@@ -799,7 +770,6 @@
                     </div>
                 </div>
 
-                <!-- Database & Tools -->
                 <div class="reveal skill-card" style="transition-delay: 0.2s;">
                     <div class="skill-icon" style="background: rgba(139, 92, 246, 0.15);">🗄️</div>
                     <h3 class="font-bold text-white mb-3">Database & Tools</h3>
@@ -836,19 +806,17 @@
                 </div>
             </div>
 
-            <!-- Tech Icons -->
             <div class="reveal">
                 <div class="text-center mb-6">
                     <p class="text-sm" style="color: var(--muted);">Other technologies I work with</p>
                 </div>
                 <div class="flex flex-wrap justify-center gap-3">
-                    <!-- Loaded dynamically in JavaScript -->
+
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Projects Section -->
     <section id="projects" class="py-24">
         <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-16 reveal">
@@ -859,7 +827,7 @@
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-                <!-- Project 1 -->
+               
                 <div class="project-card reveal">
                     <div class="project-img" style="background: linear-gradient(135deg, #1a1a2e, #16213e); display: flex; align-items: center; justify-content: center; font-size: 4rem;">
                         🫁
@@ -952,8 +920,31 @@
                     </div>
                 </div>
 
-                <!-- Project 5 / CTA -->
-                <div class="project-card reveal flex items-center justify-center" style="transition-delay: 0.2s; min-height: 320px; background: linear-gradient(135deg, rgba(99,102,241,0.05), rgba(6,182,212,0.05));">
+                <div class="project-card reveal" style="transition-delay: 0.2s;">
+                    <div class="project-img" style="background: linear-gradient(135deg, #1e293b, #f59e0b); display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                        🚖
+                        <div class="project-overlay">
+                            <div class="flex gap-3">
+                                <a href="https://github.com/Alaguselvam003/Cab-Booking-System" target="_blank" class="btn-primary py-2 px-4 text-sm"><i class="fab fa-github"></i> GitHub</a>
+                                <a href="https://cab-booking-system-orpin.vercel.app" target="_blank" class="btn-primary py-2 px-4 text-sm"><i class="fas fa-eye"></i> Website</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 mb-2 inline-block">Full Stack</span>
+                        <h3 class="font-bold text-white text-lg mb-2">SwiftCab - Cab Booking System</h3>
+                        <p class="text-sm mb-4" style="color: var(--muted);">A comprehensive cab booking application featuring Passenger, Driver, and Admin dashboards, authentication, and an interactive Leaflet route map with a fare estimator.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tech-badge">Spring Boot</span>
+                            <span class="tech-badge">Angular</span>
+                            <span class="tech-badge">MySQL</span>
+                            <span class="tech-badge">Leaflet GIS</span>
+                            <span class="tech-badge">Bootstrap</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card reveal flex items-center justify-center" style="transition-delay: 0.3s; min-height: 320px; background: linear-gradient(135deg, rgba(99,102,241,0.05), rgba(6,182,212,0.05));">
                     <div class="text-center p-8">
                         <div class="text-5xl mb-4">🚀</div>
                         <h3 class="font-bold text-white text-lg mb-2">More Coming Soon</h3>
@@ -968,7 +959,6 @@
         </div>
     </section>
 
-    <!-- Journey Section -->
     <section id="journey" class="py-24" style="background: rgba(15, 23, 42, 0.4);">
         <div class="max-w-4xl mx-auto px-6">
             <div class="text-center mb-16 reveal">
@@ -977,10 +967,8 @@
                 <p class="mt-3 text-base" style="color: var(--muted);">Education, experience, and milestones</p>
             </div>
 
-
             <div class="space-y-8">
 
-                <!-- Milestone 1 -->
                 <div class="timeline-item reveal">
                     <div class="timeline-dot"></div>
                     <div class="skill-card mb-0">
@@ -996,7 +984,6 @@
                     </div>
                 </div>
 
-                <!-- Milestone 2 -->
                 <div class="timeline-item reveal" style="transition-delay: 0.1s;">
                     <div class="timeline-dot"></div>
                     <div class="skill-card mb-0">
@@ -1017,7 +1004,6 @@
                     </div>
                 </div>
 
-                <!-- Milestone 3 -->
                 <div class="timeline-item reveal" style="transition-delay: 0.2s;">
                     <div class="timeline-dot"></div>
                     <div class="skill-card mb-0">
@@ -1038,7 +1024,6 @@
                     </div>
                 </div>
 
-                <!-- Milestone 4 -->
                 <div class="timeline-item reveal" style="transition-delay: 0.3s;">
                     <div class="timeline-dot"></div>
                     <div class="skill-card mb-0">
@@ -1057,7 +1042,6 @@
                     </div>
                 </div>
 
-                <!-- Milestone 5 -->
                 <div class="timeline-item reveal" style="transition-delay: 0.4s;">
                     <div class="timeline-dot"></div>
                     <div class="skill-card mb-0">
@@ -1075,7 +1059,6 @@
                     </div>
                 </div>
 
-                <!-- Milestone 6 -->
                 <div class="timeline-item reveal" style="transition-delay: 0.5s;">
                     <div class="timeline-dot"></div>
                     <div class="skill-card mb-0">
@@ -1093,12 +1076,10 @@
                     </div>
                 </div>
 
-
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="contact" class="py-24">
         <div class="max-w-5xl mx-auto px-6">
             <div class="text-center mb-16 reveal">
@@ -1109,7 +1090,7 @@
 
             <div class="grid md:grid-cols-2 gap-10">
 
-                <!-- Contact Info -->
+                
                 <div class="reveal">
                     <h3 class="text-xl font-bold text-white mb-6">Get in Touch</h3>
 
@@ -1142,12 +1123,12 @@
                     <div class="card-glow p-5">
                         <p class="text-sm font-medium text-white mb-2">🚀 Available for:</p>
                         <ul class="space-y-1">
-                            <!-- Loaded dynamically in JavaScript -->
+                            
                         </ul>
                     </div>
                 </div>
 
-                <!-- Contact Form -->
+                
                 <div class="reveal" style="transition-delay: 0.2s;">
                     <form id="contactForm" class="space-y-4">
                         <div>
@@ -1171,7 +1152,7 @@
                         </button>
                     </form>
 
-                    <!-- Success message (hidden) -->
+                   
                     <div id="successMsg" class="hidden mt-4 p-4 rounded-xl text-center" style="background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3);">
                         <p class="text-green-400 font-medium">✅ Message sent! I'll get back to you soon.</p>
                     </div>
@@ -1180,7 +1161,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="py-10 border-t" style="border-color: rgba(99,102,241,0.15);">
         <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
             <div class="flex items-center gap-2">
@@ -1201,7 +1181,7 @@
     </footer>
 
     <script>
-        // ========== Navbar scroll effect ==========
+
         const navbar = document.querySelector('.navbar');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
@@ -1211,7 +1191,6 @@
             }
         });
 
-        // ========== Mobile menu ==========
         const menuBtn = document.getElementById('menuBtn');
         const mobileMenu = document.getElementById('mobileMenu');
 
@@ -1222,7 +1201,6 @@
             icon.classList.toggle('fa-times');
         });
 
-        // Close mobile menu on link click
         mobileMenu.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.remove('open');
@@ -1232,7 +1210,6 @@
             });
         });
 
-        // ========== Particles ==========
         function createParticles() {
             const container = document.getElementById('particles');
             const colors = ['rgba(99,102,241,0.6)', 'rgba(139,92,246,0.6)', 'rgba(6,182,212,0.6)'];
@@ -1254,14 +1231,12 @@
         }
         createParticles();
 
-        // ========== Scroll reveal ==========
         const reveals = document.querySelectorAll('.reveal');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
 
-                    // Animate progress bars
                     const progressBars = entry.target.querySelectorAll('.progress-fill');
                     progressBars.forEach(bar => {
                         const width = bar.getAttribute('data-width');
@@ -1275,21 +1250,18 @@
 
         reveals.forEach(el => observer.observe(el));
 
-        // ========== Tech badges (fix template literal issue) ==========
         const techList = ["Java", "Spring Boot", "Angular", "MySQL", "JDBC", "HTML/CSS", "JavaScript", "Bootstrap", "Git", "GitHub", "Figma", "Postman", "IntelliJ IDEA", "VS Code"];
         const techContainer = document.querySelector('#skills .reveal:last-child .flex.flex-wrap');
         if (techContainer) {
             techContainer.innerHTML = techList.map(tech => `<span class="tech-badge">${tech}</span>`).join('');
         }
 
-        // ========== Available for list ==========
         const availableList = document.querySelector('.card-glow ul');
         if (availableList) {
             const items = ["Full-time positions", "Internship roles", "Freelance projects", "Java developer positions"];
             availableList.innerHTML = items.map(item => `<li class="text-sm flex items-center gap-2" style="color: var(--muted);"><span style="color: #22c55e;">✓</span> ${item}</li>`).join('');
         }
 
-        // ========== Contact form ==========
         document.getElementById('contactForm').addEventListener('submit', (e) => {
             e.preventDefault();
             const btn = e.target.querySelector('button');
@@ -1302,7 +1274,6 @@
             }, 1500);
         });
 
-        // ========== Smooth active nav link ==========
         const sections = document.querySelectorAll('section[id]');
         const navLinks = document.querySelectorAll('.nav-link');
 

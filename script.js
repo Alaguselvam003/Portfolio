@@ -1,4 +1,4 @@
-// Smooth scrolling for navigation links
+
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -9,7 +9,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Intersection Observer for animations on scroll
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
@@ -24,17 +23,15 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe all project cards and stat cards
 document.querySelectorAll('.project-card, .stat-card, .education-item').forEach(el => {
     el.style.opacity = '0';
     observer.observe(el);
 });
 
-// Active navigation link on scroll
 window.addEventListener('scroll', () => {
     let current = '';
     const sections = document.querySelectorAll('section');
-    
+
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.clientHeight;
@@ -42,7 +39,7 @@ window.addEventListener('scroll', () => {
             current = section.getAttribute('id');
         }
     });
-    
+
     document.querySelectorAll('.nav-link').forEach(link => {
         link.classList.remove('active');
         if (link.getAttribute('href').slice(1) === current) {
@@ -51,7 +48,6 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// Add active link styles
 const style = document.createElement('style');
 style.textContent = `
     .nav-link.active {
@@ -62,7 +58,6 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Prevent animation on page load
 window.addEventListener('load', () => {
     document.body.style.animation = 'none';
 });
