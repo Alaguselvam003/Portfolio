@@ -188,7 +188,7 @@ Update the skill categories in the skills section:
 ## Support
 
 For issues or questions, contact:
-- Email: alagu1637@gmail.com
+- Email: alaguselvam062004@gmail.com
 - LinkedIn: linkedin.com/in/alagu-selvam-757a99250
 - GitHub: github.com/Alaguselvam003
 
